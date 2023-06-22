@@ -5,27 +5,26 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController cc;
-
-    private float vertical;
-    private float horizontal;
-    private float gravity;
-    [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotateSpeed;
+    private float sidewayMovement;
+    private float forwardMovement;
+    private float verticalVelocity;
 
     private void Update()
     {
-        gravity = Physics.gravity.y * Time.deltaTime;
-        vertical = Input.GetAxis("Vertical") * speed;
-        horizontal = Input.GetAxis("Horizontal") * speed;
+        forwardMovement = Input.GetAxis("Horizontal") * moveSpeed;
+        sidewayMovement = Input.GetAxis("Vertical") * moveSpeed;
+        Vector3 playerDirect = new Vector3(-forwardMovement, 0, -sidewayMovement);
+        verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
-        Vector3 playerVector = new Vector3(-horizontal, 0, -vertical);
-
-        cc.Move(playerVector * Time.deltaTime);
-        
-        if (playerVector != Vector3.zero)
+        if (playerDirect != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(playerVector, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            Quaternion toRotation = Quaternion.LookRotation(playerDirect, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
         }
+
+        Vector3 playerMovement = new Vector3 (playerDirect.x, verticalVelocity, playerDirect.z);
+        cc.Move(playerMovement * Time.deltaTime);
     }
 }
