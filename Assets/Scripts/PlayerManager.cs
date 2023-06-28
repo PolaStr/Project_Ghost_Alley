@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float candyCounter;
+    public static float candyCounter = 0;
 }

@@ -7,12 +7,11 @@ public class FollowPlayer : MonoBehaviour
 {
     public Transform target;
     NavMeshAgent nav;
-    public GameObject cat;
+
 
 
     private void Start()
     {
-        cat.transform.Rotate(90, 0, 0);
         nav = GetComponent<NavMeshAgent>();
     }
 

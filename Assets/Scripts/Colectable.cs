@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Colectable : MonoBehaviour
 {
-    private PlayerManager playerManager;
+    public PlayerManager playerManager;
     public bool canBeCollected = true;
+    public TextMeshProUGUI counter;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player") && canBeCollected)
         {
-            playerManager = other.gameObject.GetComponent<PlayerManager>();
-            playerManager.candyCounter++;
-            Destroy(gameObject);
+                playerManager = other.gameObject.GetComponent<PlayerManager>();
+                PlayerManager.candyCounter++;
+                Destroy(gameObject);
+                counter.text = (PlayerManager.candyCounter).ToString();
         }
     }
 }
