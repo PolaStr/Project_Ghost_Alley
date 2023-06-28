@@ -16,6 +16,12 @@ public class Colectable : MonoBehaviour
                 PlayerManager.candyCounter++;
                 Destroy(gameObject);
                 counter.text = (PlayerManager.candyCounter).ToString();
+
+            if (PlayerManager.candyCounter > 8)
+            {
+                counter.text = ("8");
+            }
         }
+
     }
 }

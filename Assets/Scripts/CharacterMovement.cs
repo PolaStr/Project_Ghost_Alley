@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     private float sidewayMovement;
     private float forwardMovement;
     private float verticalVelocity;
+    public Camera cam;
 
     private void Update()
     {
@@ -26,5 +27,16 @@ public class CharacterMovement : MonoBehaviour
 
         Vector3 playerMovement = new Vector3 (playerDirect.x, verticalVelocity, playerDirect.z);
         cc.Move(playerMovement * Time.deltaTime);
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            cam.transform.position = new Vector3(-3.5940001f, 3.7479558f, -6.87699986f);
+            cam.transform.rotation = new Quaternion(0.254190862f, 0.658472002f, -0.25298205f, 0.661665916f);
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            cam.transform.position = new Vector3(0.901608825f, 3.7479558f, -3.70607209f);
+            cam.transform.rotation = new Quaternion(-0.0610680021f, 0.919853508f, -0.353388697f, -0.1589237f);
+        }
     }
 }
